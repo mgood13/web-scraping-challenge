@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Mars Scraping Module</title>
+    <meta charset="UTF-8" name = "viewport" content="width=device-width, initial-scale=1">
+    <title>Weather Analysis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel = "stylesheet" href = "bootstrap.css">
+    <link rel = "stylesheet" href = "style.css">
 </head>
 <body>
-    <h1>HELLO TO THE MARS SCRAPING MODULE</h1>
-{{structure}}
+    <div class="jumbotron">
+  <h1 class="display-4" align = 'center'>Mars Scraping Module</h1>
+  <p class="lead">{{structure}} </p>
+  <hr class="my-4">
+
+            <div class = 'text-center'>
+                <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">TO MARS!</a></p>
+            </div>
+    </div>
+
+<h1>{{structure['article_dictionary']['date']}}</h1>
+
 </body>
 </html>
