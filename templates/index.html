@@ -20,5 +20,21 @@
 
 <h1>{{structure['article_dictionary']['date']}}</h1>
 
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        {% for hemi in structure['hemisphere_list'] %}
+            <div class="carousel-item">
+                <img src="{{hemi['img_url']}}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{hemi['title']}}</h5>
+                </div>
+            </div>
+        {% endfor %}
+
+
+    </div>
+</div>
+
+
 </body>
 </html>
