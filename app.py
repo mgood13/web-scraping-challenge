@@ -23,6 +23,7 @@ def scrape_html():
     if "mars_data" in mongo.db.list_collection_names():
         collection = mongo.db['mars_data']
         collection.drop()
+
     html_structure = scrape()
     data = mongo.db.mars_data
     data.insert_one(html_structure)
