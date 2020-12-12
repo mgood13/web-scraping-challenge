@@ -3,3 +3,26 @@ max-width: 100%; !important
 border-radius: 100px !important
 
 }
+
+.dataframe{
+border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border: 3px solid #fff;
+    text-align:center;
+}
+.dataframe thead tr{
+
+    background-color: #E23524;
+    color: #ffffff;
+    text-align: center;
+
+}
+
+.evenrow{
+background-color: #505655
+
+}

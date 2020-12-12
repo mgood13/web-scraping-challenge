@@ -69,7 +69,32 @@ def scrape():
     tables = pd.read_html(marsfact_url)
 
     summary_table = tables[0]
-    table_string = summary_table.to_html()
+
+    summary_table = summary_table.rename(columns={0: 'Parameter', 1: 'Value'})
+
+    summary_table
+    table_string = summary_table.to_html(index = False)
+
+    table = table_string.split('\n')
+    temp = []
+    count = 0
+    for x in table:
+        if '<tr>' in x:
+            count += 1
+            if count % 2 == 0:
+                temp.append('    <tr class = "evenrow">')
+            else:
+                temp.append('    <tr class = "oddrow">')
+        elif '<tr style' in x:
+            temp.append('    <tr style = "text-align: center">')
+        elif '<table ' in x:
+            temp.append('<table class = "dataframe">')
+        else:
+            temp.append(x)
+
+    table = temp
+    table_string = '\n'.join(table)
+
 
     scraped_dictionary['table_string'] = table_string
 
