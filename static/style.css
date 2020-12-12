@@ -1,9 +1,5 @@
-.featured_image{
-max-width: 100%; !important
-border-radius: 100px !important
 
-}
-
+/* This class is intended to format the table that we obtained using pandas */
 .dataframe{
 border-collapse: collapse;
     margin: 25px 0;
@@ -14,6 +10,7 @@ border-collapse: collapse;
     border: 3px solid #fff;
     text-align:center;
 }
+/* Further formatting for the rows and headers */
 .dataframe thead tr{
 
     background-color: #E23524;
@@ -21,7 +18,7 @@ border-collapse: collapse;
     text-align: center;
 
 }
-
+/* Change the format of the even rows to provide some contrast for every other row */
 .evenrow{
 background-color: #505655
 

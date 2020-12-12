@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- This program is designed to structure the data that we've scraped from the JPL and NASA websites -->
+    <!-- This section initializes the file and links the relevant css files. The first bootstrap is for functionality and the second is for dark formatting -->
     <meta charset="UTF-8" name = "viewport" content="width=device-width, initial-scale=1">
     <title>Mars Scraping Module</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -11,7 +13,7 @@
 
 
 <body>
-
+<!-- The jumbotron displays the title and the button that the user can press to gather new data. -->
     <div class="jumbotron">
   <h1 class="display-4" align = 'center'>Mars Scraping Module</h1>
   <hr class="my-4">
@@ -21,12 +23,13 @@
             </div>
     </div>
 
-
+<!-- This card displays the data from the first article shown on the NASA news webpage -->
 <div align = 'center'>
     <div class="card text-white bg-primary mb-3" style="max-width: 50rem;">
         <a href = 'https://mars.nasa.gov/news/8812/5-hidden-gems-are-riding-aboard-nasas-perseverance-rover/' target = _blank>
             <div class="card-header"><h2>Featured Article</h2></div>
             </a>
+        <!-- Here we collect the date, title, and teaser text of the article. -->
   <div class="card-body">
     <h4 class="card-title">{{structure['article_dictionary']['title']}}</h4>
       <p class="card-text"> <em> {{structure['article_dictionary']['date']}}</em></p>
@@ -35,13 +38,15 @@
 </div>
     </div>
     <div class = 'container'>
+
+        <!-- This section  displays the featured image (with caption) and our mars data table. -->
 <div class = 'row'>
     <div class = 'col-md-7'>
             <h3 align = 'center'> Featured Image of the Day</h3>
             <img src = "{{structure['featured_dictionary']['url']}}", alt = 'NOTHING', style = "width:100%; border-radius: 50px">
             <h4>{{structure['featured_dictionary']['title']}}</h4>
     </div>
-
+<!-- Mars Facts table. The |safe tag here basically tells the html to just basically run the string in the dictionary -->
     <div class = 'col-md-5'>
         <h3 align = 'center'>Mars Facts</h3>
         <div align = 'center'>
@@ -51,7 +56,7 @@
     </div>
 </div>
         </div>
-
+<!-- This section displays all of the hemisphere images. -->
 <div class="jumbotron">
   <h1 class="display-4" align = 'center'>The Hemispheres of Mars</h1>
   <p class="lead"> </p>
@@ -78,7 +83,7 @@
 
     </div>
 
-
+<!-- Javascript -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 

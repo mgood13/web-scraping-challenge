@@ -5,7 +5,11 @@ import pandas as pd
 
 def scrape():
     executable_path = {"executable_path": "/Users/michael/Desktop/UPENN_Class_Directory/chromedriver"}
-    browser = Browser("chrome", **executable_path, headless=False)
+
+    # Make sure that the browser is headless (this means that there won't be an actual browser window opened for the user to see)
+    browser = Browser("chrome", **executable_path, headless=True)
+
+    # This dictionary will hold all of the data that we scrape and will be passed back to the place that calls the function.
     scraped_dictionary = {}
 
     url = 'https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest'
@@ -42,11 +46,13 @@ def scrape():
 
     scraped_dictionary['article_dictionary']['text'] = news_p
 
-    # Images
+    # This opens up the images section of the jpl website
     url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
     browser.visit(url)
     time.sleep(2)
 
+    # Here we click the full image and then more info buttons in order to get to the page that will allow us to get the
+    # full image url.
     browser.links.find_by_partial_text('FULL IMAGE').click()
     browser.links.find_by_partial_text('more info').click()
 
@@ -60,24 +66,33 @@ def scrape():
     image_url = image.find('img')['src']
     image_title = image.find('img')['title']
 
+    # Now that we've scraped the image url we combine it with the base url to create the full image url
     full_url = base_url + image_url
 
     scraped_dictionary['featured_dictionary']['url'] = full_url
     scraped_dictionary['featured_dictionary']['title'] = image_title
 
+    # Here we access the mars fact page.
     marsfact_url = 'https://space-facts.com/mars/'
+
+    # Use pandas to obtain all of the tables on the page.
     tables = pd.read_html(marsfact_url)
 
+    # Take the single table that we want.
     summary_table = tables[0]
 
+    # Update the columns of the table
     summary_table = summary_table.rename(columns={0: 'Parameter', 1: 'Value'})
 
-    summary_table
+    # Create the string that we will then modify with the proper classes.
     table_string = summary_table.to_html(index = False)
 
+    # Split the string by the newline characters.
     table = table_string.split('\n')
     temp = []
     count = 0
+
+    # Loop through the list and update each item as needed for the proper formatting.
     for x in table:
         if '<tr>' in x:
             count += 1
@@ -93,11 +108,14 @@ def scrape():
             temp.append(x)
 
     table = temp
+
+    # Join the table back together into a string and store it for usage in the html
     table_string = '\n'.join(table)
 
 
     scraped_dictionary['table_string'] = table_string
 
+    # Here we travel to the hemisphere image page.
     url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     browser.visit(url)
     time.sleep(2)
@@ -108,6 +126,8 @@ def scrape():
     items = len(links)
     hemisphere_list = []
 
+    # Loop through the 4 links on the page, find the proper url source and take the image.
+    # Store the title and url in the dictionary for later usage.
     for i in range(items):
         hemisphere_dict = {'title':"",'img_url':""}
         link_title = links[i].find('h3').text
@@ -126,6 +146,7 @@ def scrape():
 
     scraped_dictionary['hemisphere_list'] = hemisphere_list
 
+    # Close the browser for cleanliness
     browser.quit()
 
     return scraped_dictionary
